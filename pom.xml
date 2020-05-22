@@ -21,7 +21,7 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>RELEASE</version>
-            <scope>test</scope>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -49,6 +49,11 @@
                             <value>true</value>
                         </property>
                     </systemProperties>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <allure.link.issue.pattern>https://example.org/browse/{}</allure.link.issue.pattern>
+                        <allure.link.tms.pattern>https://example.org/browse/{}</allure.link.tms.pattern>
+                    </systemPropertyVariables>
                 </configuration>
                 <dependencies>
                     <dependency>
