@@ -1,6 +1,8 @@
 package page;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -9,7 +11,11 @@ public class ContactPage {
     By addmemberLocator = By.cssSelector(".ww_operationBar:nth-child(1) > .js_add_member");
     By searchmemberLocator = By.id("memberSearchInput");
     long time;
+    RemoteWebDriver driver;
 
+    public ContactPage(RemoteWebDriver driver) {
+        this.driver = driver;
+    }
 
     //addContact
     public ContactPage addMember(String username, String acctid, String mobile) {
@@ -21,20 +27,20 @@ public class ContactPage {
         }
 
 
-        new WebDriverWait(MainPage.driver, 10)
+        new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.visibilityOfElementLocated(addmemberLocator));
 
-        new WebDriverWait(MainPage.driver, 10)
+        new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(addmemberLocator));
-        MainPage.driver.findElement(addmemberLocator).click();
+        driver.findElement(addmemberLocator).click();
 
-        new WebDriverWait(MainPage.driver, 10)
+        new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.invisibilityOfElementLocated(addmemberLocator));
 
-        MainPage.driver.findElement(By.name("username")).sendKeys(username);
-        MainPage.driver.findElement(By.name("acctid")).sendKeys(acctid);
-        MainPage.driver.findElement(By.name("mobile")).sendKeys(mobile);
-        MainPage.driver.findElement(By.cssSelector(".js_btn_save")).click();
+        driver.findElement(By.name("username")).sendKeys(username);
+        driver.findElement(By.name("acctid")).sendKeys(acctid);
+        driver.findElement(By.name("mobile")).sendKeys(mobile);
+        driver.findElement(By.cssSelector(".js_btn_save")).click();
         return this;
 
     }
@@ -42,8 +48,8 @@ public class ContactPage {
     //searchContact
     public ContactPage searchContact(String searchStr) {
         //todo
-        MainPage.driver.findElement(searchmemberLocator).sendKeys(searchStr);
-        new WebDriverWait(MainPage.driver,10)
+        driver.findElement(searchmemberLocator).sendKeys(searchStr);
+        new WebDriverWait(driver,10)
                 .until(ExpectedConditions.elementToBeClickable(By.linkText("删除")));
         return this;
     }
@@ -52,8 +58,8 @@ public class ContactPage {
     public ContactPage deleteContact() {
         try {
             Thread.sleep(4000);
-            MainPage.driver.findElement(By.linkText("删除")).click();
-            MainPage.driver.findElement(By.linkText("确认")).click();
+            driver.findElement(By.linkText("删除")).click();
+            driver.findElement(By.linkText("确认")).click();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

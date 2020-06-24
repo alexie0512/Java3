@@ -36,7 +36,7 @@ public class ContactPageTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        MainPage.driver.quit();
+        main.quit();
 
     }
 }
