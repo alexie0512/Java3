@@ -7,51 +7,43 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class MainPage {
-
-    public RemoteWebDriver driver;
-
-
-    public MainPage(){
-        String url = "https://work.weixin.qq.com/wework_admin/frame";
-        driver = new ChromeDriver();
+public class MainPage extends BasePage {
+    public MainPage() {
+        super();
+        String url = "https://work.weixin.qq.com/wework_admin/frame#index";
         driver.get(url);
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.manage().deleteAllCookies();
-        
+
         //todo: 改成从文件读取
 
-        driver.manage().addCookie(new Cookie("cookie: pgv_pvid", "6983151680"));
+        driver.manage().addCookie(new Cookie("pgv_pvid", "6983151680"));
         driver.manage().addCookie(new Cookie("wwrtx.i18n_lan", "en"));
         driver.manage().addCookie(new Cookie("_ga", "GA1.2.1012854905.1590652117"));
         driver.manage().addCookie(new Cookie("Hm_lvt_9364e629af24cb52acc78b43e8c9f77d", "1590652117,1590756055,1590990426"));
         driver.manage().addCookie(new Cookie("pgv_pvi", "4687210496"));
-        driver.manage().addCookie(new Cookie("wwrtx.ref", "direct"));
-        driver.manage().addCookie(new Cookie("wwrtx.refid", "8791165101091529"));
-        driver.manage().addCookie(new Cookie("ww_rtkey", "3602408383"));
         driver.manage().addCookie(new Cookie("_gid", "GA1.2.1528439743.1592968694"));
-        driver.manage().addCookie(new Cookie("wwrtx.vst", "6UN7SPhhde_g6N_BJzxpNpUU8mKpW8L3MqhbKFc1sBvjVh9zpZzww3lHEPaBLtroSkaD7UJ7hWJyLjvGpdsxir6VFjAU0Qt-8DqUlEenEg9RhtjtghM_LNGBmgomHiAu6bEydWVzJAvc7qoHJDDNYahfHSkRHjET1nTYHCPLnM-yk7iJpXiI3-aAyBd2NxNf85Wzn_9G1nDbiVs92Hz7d-7NJh_2FjGFDuV_3xI7ztgqQZsbjFZihrc_H9oWIdi9ufMRxv_ZGcPL5nZ-n_Bxuw"));
-        driver.manage().addCookie(new Cookie("wwrtx.d2st", "a8172312"));
-        driver.manage().addCookie(new Cookie("wwrtx.sid", "fZ1aotcN8ZKz5qvSLCD4uatUsZxQu2sAlzFu20uycDTxT0nGdMUoHAvtj-eNm7qT"));
+        driver.manage().addCookie(new Cookie("wwrtx.ref", "direct"));
+        driver.manage().addCookie(new Cookie("wwrtx.refid", "8791165101315584"));
+        driver.manage().addCookie(new Cookie("ww_rtkey", "227331390"));
+        driver.manage().addCookie(new Cookie("_gat", "1"));
+        driver.manage().addCookie(new Cookie("wwrtx.vst", "llfyvIV3k3yes2c-gxHWdz-ciC97MevmCkNuxiWNIOS8Ekt0CwCKwqYQV9gTFDtcDvGGgPV8HbxdWuBRw8vb42uro5wH0zpa6xXpSeyrpNOc314J39Ck5P76kkoIneYbqgpsySODwG1uDS-PKKmT6Yx476zvelEisoe2aC3zNaiRL9hzolUy5cABSnjT-MshO3X27feDnq_SD8Z1Uh65Jql3qlNIuKbPU-xjLQ9zrXiEVd8m0PG2mGRwi_1kq34Utf3_qOz43dQOvGKPVwS5zw"));
+        driver.manage().addCookie(new Cookie("wwrtx.d2st", "a1852661"));
+        driver.manage().addCookie(new Cookie("wwrtx.sid", "fZ1aotcN8ZKz5qvSLCD4uYZ5w1gUuTsoCZ3N5vubd0Effgkyut-GwHhfxkWOsxL2"));
         driver.manage().addCookie(new Cookie("wwrtx.ltype", "1"));
         driver.manage().addCookie(new Cookie("wxpay.corpid", "1970325046121051"));
         driver.manage().addCookie(new Cookie("wxpay.vid", "1688853084643378"));
         driver.manage().addCookie(new Cookie("wwrtx.vid", "1688853084643378"));
         driver.manage().addCookie(new Cookie("wwrtx.logined", "true"));
-        driver.manage().addCookie(new Cookie("_gat", "1"));
 
         System.out.println(driver.manage().getCookies());
         driver.get(url);
     }
 
     //From Main Page to Contact Page
-    public ContactPage toContact(){
+    public ContactPage toContact() {
         //todo
-        driver.findElement(By.cssSelector("#menu_contacts")).click();
+        click(By.cssSelector("#menu_contacts"));
         return new ContactPage(driver);
     }
 
-    public void quit() {
-        driver.quit();
-    }
 }

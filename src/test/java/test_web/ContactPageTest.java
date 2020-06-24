@@ -18,25 +18,25 @@ public class ContactPageTest {
 
     @Test()
     void testAddMember() {
-        contact.addMember("AlexisTest02", "TestAccount02", "17821460513");
+        contact.addMember("AlexisTest03", "TestAccount03", "17821460514");
         //todo: assertion
     }
 
 
     @Test()
     void testSearchandDelete() {
-        contact.searchContact("AlexisTest02").deleteContact();
+        contact.searchContact("AlexisTest03").deleteContact();
 
     }
 
     @AfterAll
     static void tearDown() {
         try {
-            Thread.sleep(20000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        main.quit();
+        contact.quit();
 
     }
 }
