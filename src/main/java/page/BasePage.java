@@ -2,6 +2,7 @@ package page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,10 +17,18 @@ import java.util.concurrent.TimeUnit;
 
 public class BasePage {
     public RemoteWebDriver driver;
+    ChromeOptions options;
+
     WebDriverWait wait;
 
     public BasePage() {
-        driver = new ChromeDriver();
+
+/*        ChromeOptions options = new ChromeOptions();
+        options.AddArguments("--lang=es");
+        ChromeDriver driver = new ChromeDriver(options);*/
+        options = new ChromeOptions();
+        options.addArguments("--lang=es");
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver,5);
     }
@@ -34,6 +43,7 @@ public class BasePage {
     }
 
     public void click(By by){
+        //todo:异常处理
         wait.until(ExpectedConditions.elementToBeClickable(by));
         driver.findElement(by).click();
 
@@ -41,10 +51,16 @@ public class BasePage {
 
 
     public void sendKeys(By by, String Str){
+        //todo：异常处理
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         driver.findElement(by).sendKeys(Str);
     }
 
+
+    public void upload(By by,String path){
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+        driver.findElement(by).sendKeys(path);
+    }
 
 
 }

@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import page.ContactPage;
 import page.MainPage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class ContactPageTest {
     static MainPage main;
     static ContactPage contact;
@@ -18,7 +20,7 @@ public class ContactPageTest {
 
     @Test()
     void testAddMember() {
-        contact.addMember("AlexisTest03", "TestAccount03", "17821460514");
+        contact.addMember("AlexisTest02", "TestAccount02", "17821460513");
         //todo: assertion
     }
 
@@ -28,6 +30,35 @@ public class ContactPageTest {
         contact.searchContact("AlexisTest03").deleteContact();
 
     }
+
+    @Test
+    void testimportFromFile(){
+        //todo:file:/C:/Users/Alexie%20Jing/IdeaProjects/Java3/target/classes/Template%20of%20batch%20import%20to%20Contacts.xlsx
+        //System.out.println(this.getClass().getResource("/Template of batch import to Contacts.xlsx"));
+        //contact.importFromFile(this.getClass().getResource("\\Template of batch import to Contacts.xlsx"));
+        //"C:\\Users\\Alexie Jing\\IdeaProjects\\Java3\\src\\main\\resources\\Template of batch import to Contacts.xlsx"
+        contact.importFromFile("C:\\Users\\Alexie Jing\\IdeaProjects\\Java3\\src\\main\\resources\\Template of batch import to Contacts.xlsx");
+    }
+
+
+    @Test
+    void workflow(){
+        String username = contact.addMember("AlexisTest02", "TestAccount02", "17821460513")
+                .searchContact("AlexisTest02").getUserName();
+        assertEquals(username,"AlexisTest02");
+    }
+
+    @Test
+    void addanddeleteDepart(){
+        contact.addDepartment("TestAddDept").findanddeleteDepartment("TestAddDept");
+    }
+
+    @Test
+    void addanddeleteTag(){
+        contact.addTag("TestAddTag").findanddeleteTag("TestAddTag");
+
+    }
+
 
     @AfterAll
     static void tearDown() {
