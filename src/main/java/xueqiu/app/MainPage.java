@@ -15,12 +15,9 @@ import java.util.concurrent.TimeUnit;
  * @date 2020 6月 2020/6/26 16:00
  * @project Java3
  */
-public class MainPage {
-    private AndroidDriver driver;
-    WebDriverWait wait;
-
+public class MainPage extends BasePage{
     public MainPage() throws MalformedURLException {
-
+        super();
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("platformName", "android");
         desiredCapabilities.setCapability("deviceName", "127.0.0.1:7555");
@@ -34,9 +31,10 @@ public class MainPage {
         driver = new AndroidDriver<>(remoteUrl, desiredCapabilities);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-
     }
 
+    public MainPage(AndroidDriver driver) {
+    }
 
 /*    //同意隐私协议
     public MainPage sendAgree(){
@@ -54,7 +52,13 @@ public class MainPage {
 
     }
 
-    //
+    //到 trendPage
+    public TrendPage toTrend(){
+        MobileElement trend = (MobileElement)driver.findElement(By.xpath("//*[@text=\"行情\"]"));
+        trend.click();
+        return new TrendPage(driver);
+    }
+
 
 
 }

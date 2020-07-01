@@ -1,5 +1,6 @@
 package test.xueqiu.app;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -40,5 +41,10 @@ class SearchPageTest {
     @Test
     void getPrice() {
         assertTrue(searchPage.search("alibaba").getPrice()>200);
+    }
+
+    @AfterAll
+    public void quit(){
+        searchPage.quit();
     }
 }
