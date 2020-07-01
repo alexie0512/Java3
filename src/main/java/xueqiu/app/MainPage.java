@@ -1,7 +1,8 @@
 package xueqiu.app;
 
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,31 +16,41 @@ import java.util.concurrent.TimeUnit;
  * @project Java3
  */
 public class MainPage {
+    private AndroidDriver driver;
+    WebDriverWait wait;
 
-    public static AppiumDriver driver;
-    public static WebDriverWait wait;
-    public static void setUp() throws MalformedURLException {
+    public MainPage() throws MalformedURLException {
+
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("platformName", "android");
         desiredCapabilities.setCapability("deviceName", "127.0.0.1:7555");
         desiredCapabilities.setCapability("appPackage", "com.xueqiu.android");
         desiredCapabilities.setCapability("appActivity", ".view.WelcomeActivityAlias");
+        desiredCapabilities.setCapability("noReset", "true");
 
         //todo:等待优化
         URL remoteUrl = new URL("http://localhost:4723/wd/hub");
 
         driver = new AndroidDriver<>(remoteUrl, desiredCapabilities);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+
     }
 
-    //同意隐私协议
-    public void sendAgree(){
+
+/*    //同意隐私协议
+    public MainPage sendAgree(){
         //com.xueqiu.android:id/tv_agree
-    }
+        MobileElement agree = (MobileElement) driver.findElement(By.id("om.xueqiu.android:id/tv_agree"));
+        agree.click();
+        return this;
+    }*/
 
-    //到searchPage
+    //到 searchPage
     public SearchPage toSearch(){
-        return new SearchPage();
+        MobileElement search = (MobileElement)driver.findElement(By.id("com.xueqiu.android:id/home_search"));
+        search.click();
+        return new SearchPage(driver);
 
     }
 

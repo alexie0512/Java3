@@ -4,9 +4,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import xueqiu.app.MainPage;
 import xueqiu.app.SearchPage;
+
+import java.net.MalformedURLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,8 +22,9 @@ class SearchPageTest {
 
 
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() throws MalformedURLException {
         mainPage = new MainPage();
+        searchPage =mainPage.toSearch();
     }
 
     @ParameterizedTest
@@ -32,7 +34,7 @@ class SearchPageTest {
     })
     void search(String keyword, String name) {
         //searchPage.search("alibaba").getSearchList()，"阿里巴巴"
-        assertEquals(searchPage.search("alibaba").getSearchList().get(0),name);
+        assertEquals(searchPage.search(keyword).getSearchList().get(0),name);
     }
 
     @Test
