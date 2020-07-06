@@ -1,5 +1,6 @@
 package test.xueqiu.app;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,17 +19,11 @@ import java.net.MalformedURLException;
  */
 public class TrendPageTest {
     static MainPage main;
-    static SearchResultPage searchResult;
-    static SearchPage search;
     static TrendPage trend;
 
     @BeforeAll
     public static void beforeAll() throws MalformedURLException {
-        main = new MainPage();
-        searchResult = new SearchResultPage();
-        search = new SearchPage();
-        trend = new TrendPage();
-        trend = main.toTrend();
+        trend = new MainPage().toTrend();
     }
 
     @ParameterizedTest
@@ -52,5 +47,10 @@ public class TrendPageTest {
     @Test
     public void deleteAllStockTest(){
         trend.deleteAllStock();
+    }
+
+    @AfterAll
+    public static void quit(){
+        trend.quit();
     }
 }

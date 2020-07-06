@@ -16,24 +16,14 @@ import java.util.concurrent.TimeUnit;
  * @project Java3
  */
 public class MainPage extends BasePage{
-    public MainPage() throws MalformedURLException {
-        super();
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("platformName", "android");
-        desiredCapabilities.setCapability("deviceName", "127.0.0.1:7555");
-        desiredCapabilities.setCapability("appPackage", "com.xueqiu.android");
-        desiredCapabilities.setCapability("appActivity", ".view.WelcomeActivityAlias");
-        desiredCapabilities.setCapability("noReset", "true");
 
-        //todo:等待优化
-        URL remoteUrl = new URL("http://localhost:4723/wd/hub");
-
-        driver = new AndroidDriver<>(remoteUrl, desiredCapabilities);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
+    public MainPage(AndroidDriver<MobileElement> driver) {
+        super(driver);
     }
 
-    public MainPage(AndroidDriver driver) {
+    public MainPage() throws MalformedURLException {
+        super();
+
     }
 
 /*    //同意隐私协议
@@ -46,16 +36,14 @@ public class MainPage extends BasePage{
 
     //到 searchPage
     public SearchPage toSearch(){
-        MobileElement search = (MobileElement)driver.findElement(By.id("com.xueqiu.android:id/home_search"));
-        search.click();
+        click(By.id("com.xueqiu.android:id/home_search"));
         return new SearchPage(driver);
 
     }
 
     //到 trendPage
     public TrendPage toTrend(){
-        MobileElement trend = (MobileElement)driver.findElement(By.xpath("//*[@text=\"行情\"]"));
-        trend.click();
+        click(By.xpath("//*[@text=\"行情\"]"));
         return new TrendPage(driver);
     }
 

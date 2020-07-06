@@ -44,7 +44,7 @@ class SearchPageTest {
     }
 
     @AfterAll
-    public void quit(){
+    public static void quit(){
         searchPage.quit();
     }
 }
