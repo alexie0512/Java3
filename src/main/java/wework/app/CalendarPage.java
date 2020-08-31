@@ -4,7 +4,6 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,5 +33,14 @@ public class CalendarPage extends BasePage{
                 .stream()
                 .map(x->x.getText())
                 .collect(Collectors.toList());
+    }
+
+
+    public CalendarPage delCalendar(String text){
+        click(byText(text));
+        click(By.id("bi_"));
+        driver.findElementByAndroidUIAutomator("resourceId(\"com.tencent.wework:id/bci\")").click();
+        return this;
+
     }
 }

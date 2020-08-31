@@ -21,7 +21,7 @@ public class weWorkMainPage extends BasePage{
     }
 
     public toDoPage toTODO(){
-        click(byText("待办"));
+        click(By.id("h7x"));
         return new toDoPage(driver);
     }
 

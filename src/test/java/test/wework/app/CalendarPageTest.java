@@ -37,4 +37,11 @@ class CalendarPageTest {
                         .getCalendar(null)
                         .contains("上班打卡"));
     }
+
+    @Test
+    void delCalendar() {
+        weWorkMainPage.toCalendar()
+                .AddCalendar("test01",null)
+                .delCalendar("test01");
+    }
 }

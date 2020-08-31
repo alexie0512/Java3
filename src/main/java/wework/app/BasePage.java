@@ -72,7 +72,7 @@ public class BasePage {
 
 
     public void sendKeys(By by, String key) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+        wait.until(ExpectedConditions.elementToBeClickable(by));
         driver.findElement(by).sendKeys(key);
     }
 
